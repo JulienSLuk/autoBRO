@@ -1,4 +1,4 @@
-Sub OpenMostRecentPDF()
+Sub OpenMostRecentWordDoc()
     Dim folderPath As String
     Dim fileSystem As Object
     Dim folder As Object
@@ -44,7 +44,7 @@ Sub OpenMostRecentPDF()
     
     ' Loop through files in the folder
     For Each file In folder.Files
-        If UCase(fileSystem.GetExtensionName(file)) = "PDF" Then
+        If UCase(fileSystem.GetExtensionName(file)) = "DOCX" Or UCase(fileSystem.GetExtensionName(file)) = "DOC" Then
             If file.DateLastModified > latestDate Then
                 latestDate = file.DateLastModified
                 latestFile = file.Path
@@ -52,11 +52,11 @@ Sub OpenMostRecentPDF()
         End If
     Next file
     
-    ' Open the most recent PDF file
+    ' Open the most recent Word document
     If latestFile <> "" Then
         Shell "explorer.exe """ & latestFile & """", vbNormalFocus
     Else
-        MsgBox "No PDF files found in the specified folder.", vbExclamation, "No Files"
+        MsgBox "No Word documents found in the specified folder.", vbExclamation, "No Files"
     End If
 End Sub
 
